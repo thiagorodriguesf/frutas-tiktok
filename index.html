@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FrutaDrama AI</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #fff5f5;
+  color: #29202a;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+}
+main {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px #0001;
+}
+h1 { color: #d63360; }
+label { display: block; margin-top: 16px; font-weight: bold; }
+input, select, button {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+input, select { border: 1px solid #ccc; }
+button {
+  background: #d63360;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  margin-top: 18px;
+}
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #fff0f3;
+  padding: 14px;
+  border-radius: 8px;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>🍓 FrutaDrama AI</h1>
+<p>Crie novelinhas de frutas humanoides para TikTok!</p>
+
+<label for="frutas">Personagens</label>
+<select id="frutas">
+<option>Morango, Banana e Maçã</option>
+<option>Morango, Banana e Abacaxi</option>
+<option>Uva, Limão e Melancia</option>
+<option>Maçã, Pera e Cereja</option>
+</select>
+
+<label for="tema">Tema da história</label>
+<select id="tema">
+<option>Traição e segredo</option>
+<option>Amor proibido</option>
+<option>Vingança inesperada</option>
+<option>Casamento e revelação</option>
+<option>Ciúmes e reconciliação</option>
+</select>
+
+<label for="cenas">Quantidade de cenas</label>
+<select id="cenas">
+<option>5</option>
+<option selected>7</option>
+<option>10</option>
+</select>
+
+<button onclick="gerar()">Gerar meu roteiro</button>
+<button onclick="copiar()">Copiar roteiro</button>
+
+<pre id="resultado">Seu roteiro aparecerá aqui...</pre>
+</main>
+
+<script>
+function gerar() {
+  const frutas = document.getElementById("frutas").value;
+  const tema = document.getElementById("tema").value;
+  const total = Number(document.getElementById("cenas").value);
+  const personagens = frutas.split(", ");
+  const protagonista = personagens[0];
+  const rival = personagens[1] || "Banana";
+
+  const etapas = [
+    "Uma descoberta inesperada muda tudo.",
+    "O protagonista começa a desconfiar.",
+    "Um segredo vem à tona.",
+    "Os personagens discutem e fazem acusações.",
+    "Surge uma prova surpreendente.",
+    "Uma revelação muda o rumo da história.",
+    "O final deixa todos sem palavras.",
+    "Uma nova mensagem revela outro mistério.",
+    "O passado volta para assombrar os personagens.",
+    "Uma decisão muda o destino de todos."
+  ];
+
+  let roteiro = "🍓 FRUTADRAMA — " + tema + "\n";
+  roteiro += "Personagens: " + frutas + "\n\n";
+
+  for (let i = 0; i < total; i++) {
+    roteiro += "CENA " + (i + 1) + "\n";
+    roteiro += "Visual: animação 3D, frutas humanoides, ";
+    roteiro += "expressões dramáticas, formato vertical 9:16.\n";
+    roteiro += "Ação: " + etapas[i] + "\n";
+    roteiro += "Fala: " + protagonista + ': "Preciso descobrir a verdade!"\n';
+    roteiro += "Resposta: " + rival + ': "Você não sabe de tudo..."\n';
+    roteiro += "Prompt para vídeo: Crie uma cena cinematográfica ";
+    roteiro += "de novelinha brasileira com " + frutas + ". ";
+    roteiro += tema + ". " + etapas[i] + "\n\n";
+  }
+
+  document.getElementById("resultado").textContent = roteiro;
+}
+
+function copiar() {
+  const texto = document.getElementById("resultado").textContent;
+  if (!texto || texto === "Seu roteiro aparecerá aqui...") {
+    alert("Gere um roteiro primeiro!");
+    return;
+  }
+  navigator.clipboard.writeText(texto)
+    .then(() => alert("Roteiro copiado!"))
+    .catch(() => alert("Selecione o texto e copie manualmente."));
+}
+</script>
+</body>
+</html>
