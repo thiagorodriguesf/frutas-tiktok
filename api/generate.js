@@ -206,3 +206,52 @@ Finalize com:
 Entregue o roteiro diretamente, sem explicar suas instruções.
 `;
 
+  
+  try {
+    const resposta = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey
+        },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            temperature: 0.9,
+            maxOutputTokens: 6000
+          }
+        })
+      }
+    );
+
+    if (!resposta.ok) {
+      console.error("Erro da Gemini API:", resposta.status);
+      return res.status(502).json({
+        error: "A IA não conseguiu gerar o roteiro. Tente novamente."
+      });
+    }
+
+    const dados = await resposta.json();
+    const roteiro = dados.candidates?.[0]?.content?.parts
+      ?.map(parte => parte.text || "")
+      .join("")
+      .trim();
+
+    if (!roteiro) {
+      return res.status(502).json({
+        error: "A IA não retornou um roteiro. Tente novamente."
+      });
+    }
+
+    return res.status(200).json({ roteiro });
+
+  } catch (erro) {
+    console.error("Erro ao conectar à IA.");
+    return res.status(500).json({
+      error: "Erro de conexão com a IA. Tente novamente."
+    });
+  }
+};
+
