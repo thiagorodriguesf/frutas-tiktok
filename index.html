@@ -4,133 +4,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FrutaDrama AI</title>
+<meta name="theme-color" content="#35152f">
+<title>FrutaDrama AI | Roteiros para TikTok</title>
 <style>
+:root {
+  --bg: #170f1c;
+  --panel: #25182c;
+  --pink: #ff648c;
+  --text: #fff6fb;
+  --muted: #d1bdd0;
+}
+* { box-sizing: border-box; }
 body {
-  font-family: Arial, sans-serif;
-  background: #fff5f5;
-  color: #29202a;
-  max-width: 700px;
-  margin: 30px auto;
+  margin: 0;
   padding: 20px;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #4a2146, var(--bg) 65%);
+  color: var(--text);
 }
-main {
-  background: white;
-  padding: 24px;
+main { max-width: 760px; margin: 25px auto; }
+header { text-align: center; margin-bottom: 25px; }
+.logo { font-size: 52px; }
+h1 { margin: 8px 0; font-size: 34px; }
+header p, .muted { color: var(--muted); line-height: 1.6; }
+.panel {
+  background: var(--panel);
+  border: 1px solid #65405f;
   border-radius: 18px;
-  box-shadow: 0 4px 18px #0001;
+  padding: 22px;
+  margin-bottom: 18px;
 }
-h1 { color: #d63360; }
-label { display: block; margin-top: 16px; font-weight: bold; }
-input, select, button {
-  box-sizing: border-box;
+label { display: block; font-weight: bold; margin: 16px 0 8px; }
+select, button {
   width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 10px;
+  padding: 13px;
+  font: inherit;
 }
-input, select { border: 1px solid #ccc; }
-button {
-  background: #d63360;
+select {
+  background: #160f1b;
   color: white;
-  border: 0;
-  cursor: pointer;
-  margin-top: 18px;
+  border: 1px solid #70536f;
 }
-pre {
+button {
+  border: 0;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 12px;
+}
+button:disabled { opacity: .6; cursor: wait; }
+.primary { background: var(--pink); color: #301020; }
+.secondary { background: #453049; color: white; }
+#resultado {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  background: #fff0f3;
-  padding: 14px;
-  border-radius: 8px;
+  line-height: 1.7;
+  font-size: 14px;
+}
+.hidden { display: none; }
+footer { text-align: center; color: var(--muted); font-size: 12px; }
+@media (max-width: 480px) {
+  body { padding: 12px; }
+  main { margin: 8px auto; }
+  h1 { font-size: 28px; }
+  .panel { padding: 16px; }
 }
 </style>
 </head>
 <body>
 <main>
-<h1>🍓 FrutaDrama AI</h1>
-<p>Crie novelinhas de frutas humanoides para TikTok!</p>
+  <header>
+    <div class="logo">🍓🍌🍎</div>
+    <h1>FrutaDrama AI</h1>
+    <p>Crie novelinhas originais de frutas humanoides para TikTok.</p>
+  </header>
 
-<label for="frutas">Personagens</label>
-<select id="frutas">
-<option>Morango, Banana e Maçã</option>
-<option>Morango, Banana e Abacaxi</option>
-<option>Uva, Limão e Melancia</option>
-<option>Maçã, Pera e Cereja</option>
-</select>
+  <section class="panel">
+    <h2>🎬 Monte sua história</h2>
 
-<label for="tema">Tema da história</label>
-<select id="tema">
-<option>Traição e segredo</option>
-<option>Amor proibido</option>
-<option>Vingança inesperada</option>
-<option>Casamento e revelação</option>
-<option>Ciúmes e reconciliação</option>
-</select>
+    <label for="protagonista">Personagem principal</label>
+    <select id="protagonista">
+      <option>Morango</option><option>Banana</option>
+      <option>Maçã</option><option>Abacaxi</option>
+      <option>Uva</option><option>Melancia</option>
+      <option>Limão</option><option>Cereja</option>
+    </select>
 
-<label for="cenas">Quantidade de cenas</label>
-<select id="cenas">
-<option>5</option>
-<option selected>7</option>
-<option>10</option>
-</select>
+    <label for="par">Segundo personagem</label>
+    <select id="par">
+      <option>Banana</option><option>Morango</option>
+      <option>Maçã</option><option>Abacaxi</option>
+      <option>Uva</option><option>Melancia</option>
+      <option>Limão</option><option>Cereja</option>
+    </select>
 
-<button onclick="gerar()">Gerar meu roteiro</button>
-<button onclick="copiar()">Copiar roteiro</button>
+    <label for="terceiro">Terceiro personagem</label>
+    <select id="terceiro">
+      <option>Maçã</option><option>Morango</option>
+      <option>Banana</option><option>Abacaxi</option>
+      <option>Uva</option><option>Melancia</option>
+      <option>Limão</option><option>Cereja</option>
+    </select>
 
-<pre id="resultado">Seu roteiro aparecerá aqui...</pre>
+    <label for="tema">Tema da novelinha</label>
+    <select id="tema">
+      <option value="traição">Traição amorosa</option>
+      <option value="vingança">Vingança inesperada</option>
+      <option value="segredo">Segredo de família</option>
+      <option value="romance">Amor proibido</option>
+      <option value="ciúmes">Ciúmes e reconciliação</option>
+      <option value="herança">Disputa por uma herança</option>
+    </select>
+
+    <label for="cenas">Número de cenas</label>
+    <select id="cenas">
+      <option value="5">5 cenas</option>
+      <option value="7" selected>7 cenas</option>
+      <option value="10">10 cenas</option>
+    </select>
+
+    <label for="estilo">Estilo visual</label>
+    <select id="estilo">
+      <option>Animação 3D cinematográfica</option>
+      <option>Filme de animação realista</option>
+      <option>Desenho 3D colorido</option>
+      <option>Novela dramática com iluminação cinematográfica</option>
+    </select>
+
+    <label for="duracao">Duração de cada cena</label>
+    <select id="duracao">
+      <option value="5">5 segundos</option>
+      <option value="8" selected>8 segundos</option>
+      <option value="10">10 segundos</option>
+    </select>
+
+    <button id="gerarBtn" class="primary" onclick="gerar()">
+      ✨ Gerar minha novelinha com IA
+    </button>
+    <p id="status" class="muted" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="panel hidden" id="painelResultado">
+    <h2>📜 Seu roteiro original</h2>
+    <p class="muted" id="resumo"></p>
+    <pre id="resultado"></pre>
+    <button class="primary" onclick="copiar()">📋 Copiar roteiro</button>
+    <button class="secondary" onclick="baixar()">⬇️ Baixar roteiro TXT</button>
+  </section>
+
+  <footer>FrutaDrama AI — gerador experimental de roteiros.</footer>
 </main>
 
 <script>
-function gerar() {
-  const frutas = document.getElementById("frutas").value;
-  const tema = document.getElementById("tema").value;
-  const total = Number(document.getElementById("cenas").value);
-  const personagens = frutas.split(", ");
-  const protagonista = personagens[0];
-  const rival = personagens[1] || "Banana";
+async function gerar() {
+  const btn = document.getElementById("gerarBtn");
+  const status = document.getElementById("status");
+  const painel = document.getElementById("painelResultado");
 
-  const etapas = [
-    "Uma descoberta inesperada muda tudo.",
-    "O protagonista começa a desconfiar.",
-    "Um segredo vem à tona.",
-    "Os personagens discutem e fazem acusações.",
-    "Surge uma prova surpreendente.",
-    "Uma revelação muda o rumo da história.",
-    "O final deixa todos sem palavras.",
-    "Uma nova mensagem revela outro mistério.",
-    "O passado volta para assombrar os personagens.",
-    "Uma decisão muda o destino de todos."
-  ];
+  const protagonist = document.getElementById("protagonista").value;
+  const second = document.getElementById("par").value;
+  const third = document.getElementById("terceiro").value;
+  const theme = document.getElementById("tema").value;
+  const scenes = Number(document.getElementById("cenas").value);
+  const style = document.getElementById("estilo").value;
+  const duration = Number(document.getElementById("duracao").value);
 
-  let roteiro = "🍓 FRUTADRAMA — " + tema + "\n";
-  roteiro += "Personagens: " + frutas + "\n\n";
-
-  for (let i = 0; i < total; i++) {
-    roteiro += "CENA " + (i + 1) + "\n";
-    roteiro += "Visual: animação 3D, frutas humanoides, ";
-    roteiro += "expressões dramáticas, formato vertical 9:16.\n";
-    roteiro += "Ação: " + etapas[i] + "\n";
-    roteiro += "Fala: " + protagonista + ': "Preciso descobrir a verdade!"\n';
-    roteiro += "Resposta: " + rival + ': "Você não sabe de tudo..."\n';
-    roteiro += "Prompt para vídeo: Crie uma cena cinematográfica ";
-    roteiro += "de novelinha brasileira com " + frutas + ". ";
-    roteiro += tema + ". " + etapas[i] + "\n\n";
-  }
-
-  document.getElementById("resultado").textContent = roteiro;
-}
-
-function copiar() {
-  const texto = document.getElementById("resultado").textContent;
-  if (!texto || texto === "Seu roteiro aparecerá aqui...") {
-    alert("Gere um roteiro primeiro!");
+  if (new Set([protagonist, second, third]).size !== 3) {
+    status.textContent = "Escolha três frutas diferentes.";
     return;
   }
-  navigator.clipboard.writeText(texto)
-    .then(() => alert("Roteiro copiado!"))
-    .catch(() => alert("Selecione o texto e copie manualmente."));
+
+  btn.disabled = true;
+  btn.textContent = "⏳ A IA está escrevendo...";
+  status.textContent = "Criando uma história original. Isso pode levar alguns segundos.";
+  painel.classList.add("hidden");
+
+  try {
+    const resposta = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        protagonist, second, third, theme, scenes, style, duration
+      })
+    });
+
+    const dados = await resposta.json().catch(() => ({}));
+
+    if (!resposta.ok) {
+      throw new Error(
+        dados.error || "Não foi possível gerar o roteiro. Tente novamente."
+      );
+    }
+
+    if (!dados.roteiro) {
+      throw new Error("A IA não retornou um roteiro válido.");
+    }
+
+    document.getElementById("resultado").textContent = dados.roteiro;
+    document.getElementById("resumo").textContent =
+      `${scenes} cenas • ${theme} • ${style}`;
+
+    painel.classList.remove("hidden");
+    status.textContent = "✅ Roteiro criado com sucesso pela IA!";
+    painel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  } catch (erro) {
+    status.textContent = "⚠️ " + erro.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "✨ Gerar minha novelinha com IA";
+  }
+}
+
+async function copiar() {
+  const texto = document.getElementById("resultado").textContent;
+  try {
+    await navigator.clipboard.writeText(texto);
+    document.getElementById("status").textContent = "Roteiro copiado!";
+  } catch {
+    document.getElementById("status").textContent =
+      "Não foi possível copiar automaticamente. Selecione o roteiro e copie manualmente.";
+  }
+}
+
+function baixar() {
+  const texto = document.getElementById("resultado").textContent;
+  const arquivo = new Blob([texto], {
+    type: "text/plain;charset=utf-8"
+  });
+  const url = URL.createObjectURL(arquivo);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "roteiro-frutadrama.txt";
+  link.click();
+  URL.revokeObjectURL(url);
 }
 </script>
 </body>
