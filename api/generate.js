@@ -61,149 +61,111 @@ module.exports = async function handler(req, res) {
   }
 
 const prompt = `
-Você é roteirista-chefe de novelinhas virais para TikTok,
-especializado em dramas emocionais com frutas humanoides
-em animação 3D cinematográfica.
-
-Sua missão é criar uma história ORIGINAL, envolvente,
-visualmente consistente e fácil de transformar em vídeo curto.
-
-DADOS DA HISTÓRIA
+Você é diretor de arte e roteirista de animações 3D com frutas humanoides.
+Crie uma história com os personagens selecionados, mantendo a identidade visual de cada fruta rigorosamente consistente em todas as cenas.
+PERSONAGENS
 Protagonista: ${protagonist}
 Segundo personagem: ${second}
 Terceiro personagem: ${third}
 Tema: ${theme}
-Quantidade exata de cenas: ${Number(scenes)}
-Duração de cada cena: ${Number(duration)} segundos
+Quantidade de cenas: ${Number(scenes)}
+Duração por cena: ${Number(duration)} segundos
 Estilo visual: ${style}
 Idioma: português brasileiro.
-
-OBJETIVO NARRATIVO
-A história deve despertar curiosidade imediatamente,
-criar uma pergunta na mente do espectador e recompensar
-a atenção com revelações progressivas.
-
-ESTRUTURA OBRIGATÓRIA
-
-CENA 1 — GANCHO
-Comece no momento mais intrigante do conflito.
-Não use introduções longas, apresentações ou explicações.
-Mostre uma acusação, uma descoberta, uma traição
-ou uma situação inesperada.
-A primeira fala deve despertar curiosidade.
-
-CENAS INTERMEDIÁRIAS — ESCALADA
-Cada cena deve revelar algo novo, aumentar a tensão,
-complicar as relações ou mudar o que o espectador acredita.
-Inclua pistas e suspeitas que façam sentido quando
-a revelação acontecer.
-Não repita informações já conhecidas.
-
-PENÚLTIMA CENA — REVELAÇÃO
-Prepare uma revelação surpreendente, mas coerente
-com as pistas apresentadas anteriormente.
-
-ÚLTIMA CENA — GANCHO FINAL
-Termine com uma descoberta, uma decisão ou uma pergunta
-que desperte vontade de assistir à próxima parte.
-Não resolva todos os conflitos.
-Evite terminar com uma frase genérica sem consequência.
-
-REGRAS PARA OS PERSONAGENS
-
-1. Todos os personagens são frutas humanoides, não pessoas
-   comuns fantasiadas de frutas.
-2. Crie uma ficha fixa para cada personagem com:
-   aparência da fruta, formato do rosto, olhos, cor,
-   roupa, acessórios, personalidade e forma de falar.
-3. Defina claramente as relações entre os três personagens.
-4. Mantenha as características físicas, roupas, acessórios,
-   personalidade e relações inalteradas em todas as cenas.
-5. Não troque roupas, cores, nomes ou papéis sem motivo
-   explícito na história.
-6. Identifique quem fala em cada diálogo.
-7. Evite colocar todos os personagens falando ao mesmo tempo.
-8. Dê a cada personagem uma voz e uma motivação próprias.
-
-REGRAS PARA OS DIÁLOGOS
-
-- Escreva em português brasileiro natural.
-- Use frases curtas, emocionais e fáceis de dublar.
-- Evite falas artificiais, explicações longas e clichês repetidos.
-- Cada fala deve revelar emoção, intenção, conflito ou informação.
-- Respeite o tempo disponível de cada cena.
-- Não repita a mesma fala em cenas diferentes.
-- Não use um narrador para explicar algo que a imagem
-  ou o diálogo pode mostrar naturalmente.
-
-REGRAS PARA CADA CENA
-
-Para cada cena, apresente:
-
-1. Número e título.
-2. Objetivo dramático da cena.
-3. Descrição visual da ação.
-4. Local e momento da história.
-5. Personagens presentes.
-6. Expressões faciais, gestos e movimentos.
-7. Diálogos com o nome de quem fala.
-8. Prompt visual completo para geração de vídeo.
-9. Enquadramento e movimento de câmera.
-10. Sugestão de áudio, ambiente e efeitos sonoros.
-11. Transição para a próxima cena.
-
-PROMPTS VISUAIS
-
-Cada prompt visual deve funcionar de forma independente.
-Não escreva apenas "o mesmo personagem da cena anterior".
-Repita as características visuais essenciais dos personagens
-que aparecem naquela cena.
-
-Descreva:
-- Fruta humanoide e aparência física.
-- Roupa e acessórios.
+REGRA PRINCIPAL: BÍBLIA VISUAL
+Antes de escrever as cenas, crie uma ficha visual definitiva para cada um dos três personagens.
+Para cada fruta, defina:
+1. Espécie e formato exato da fruta.
+2. Cor principal e detalhes de textura.
+3. Formato do rosto, olhos, sobrancelhas e boca.
+4. Tipo de corpo, proporções e altura relativa.
+5. Roupa completa, cores e calçados.
+6. Acessórios permanentes.
+7. Personalidade e expressões características.
+8. Voz e maneira de falar.
+As características visuais devem ser específicas.
+Exemplo de especificidade: "Morango vermelho com pequenas
+sementes douradas, olhos grandes castanhos, jaqueta azul-marinho,
+calça branca e tênis vermelhos".
+Esse exemplo é apenas ilustrativo. Crie características
+originais adequadas à história.
+Depois de definir a ficha visual, considere-a imutável
+durante toda a história.
+REGRAS DE CONTINUIDADE VISUAL
+- Nunca mude a cor, a espécie ou o formato do personagem.
+- Nunca troque roupas, calçados ou acessórios permanentes.
+- Mantenha os mesmos olhos, rosto, proporções e textura.
+- Não transforme uma fruta em outra espécie.
+- Não altere a idade aparente ou o estilo de animação.
+- Preserve a altura relativa entre os personagens.
+- Mantenha os mesmos detalhes visuais mesmo em closes.
+- Emoções podem mudar; a identidade física não.
+- Se uma cena ocorrer em outro local, altere o cenário,
+  não a aparência dos personagens.
+- Só permita mudanças de roupa quando forem explicitamente
+  solicitadas na história; nesse caso, descreva a mudança
+  e mantenha-a nas cenas seguintes.
+ESTRUTURA DA HISTÓRIA
+Cena 1:
+Comece com um acontecimento intrigante, uma descoberta,
+uma acusação ou um conflito imediato.
+Cenas intermediárias:
+Desenvolva o conflito progressivamente. Cada cena deve
+acrescentar informação, emoção ou consequência.
+Penúltima cena:
+Prepare uma revelação surpreendente, coerente com as pistas.
+Última cena:
+Termine com uma revelação ou decisão que desperte curiosidade
+para a próxima parte.
+Não repita diálogos nem crie cenas sem função narrativa.
+FORMATO DE SAÍDA
+Comece com:
+1. Título da história.
+2. Sinopse curta.
+3. BÍBLIA VISUAL DOS PERSONAGENS.
+4. Uma ficha individual e detalhada para cada fruta.
+Depois, apresente exatamente ${Number(scenes)} cenas.
+Em cada cena, informe:
+- Número e título.
+- Objetivo narrativo.
+- Local e ação.
+- Personagens presentes.
+- Expressões e movimentos.
+- Diálogos em português brasileiro.
+- Prompt visual completo para geração de vídeo.
+- Enquadramento e movimento de câmera.
+- Sugestão de áudio e efeitos sonoros.
+- Transição para a cena seguinte.
+REGRAS PARA OS PROMPTS VISUAIS
+Cada prompt precisa funcionar independentemente.
+Não escreva apenas "mesmo personagem da cena anterior".
+Em cada prompt visual, repita integralmente as características
+físicas e as roupas de todos os personagens presentes,
+conforme definidas na Bíblia Visual.
+Descreva também:
+- Posição e ação de cada personagem.
 - Expressão facial e linguagem corporal.
-- Cenário, iluminação, cores e atmosfera.
-- Posição e ação dos personagens.
+- Cenário, iluminação e atmosfera.
 - Enquadramento vertical 9:16.
 - Estilo ${style}.
-- Animação fluida e expressões legíveis.
+- Animação fluida e detalhes cinematográficos.
 - Ausência de legendas, logotipos e marcas d'água.
-
-CONTINUIDADE
-
-Antes de escrever cada cena, verifique mentalmente:
-- O que aconteceu na cena anterior?
-- O que cada personagem sabe neste momento?
-- A ação é consequência do que já aconteceu?
-- A revelação é compatível com as pistas anteriores?
-- As roupas e a aparência permanecem consistentes?
-
-ORIGINALIDADE E QUALIDADE
-
-Não copie histórias conhecidas, roteiros existentes
-ou falas de obras protegidas.
-Evite soluções previsíveis quando houver alternativa melhor.
-Não invente uma reviravolta sem preparar nenhuma pista.
-Não prometa viralização nem use estatísticas inventadas.
-Priorize clareza, emoção, ritmo e coerência.
-
-FORMATO DA RESPOSTA
-
-Comece com:
-- Título chamativo.
-- Sinopse de até 3 frases.
-- Ficha visual fixa dos três personagens.
-- Relações e conflitos entre eles.
-
-Depois, apresente exatamente ${Number(scenes)} cenas,
-numeradas na ordem correta, seguindo todas as regras.
-
-Finalize com:
-- Gancho para a próxima parte.
-- Uma sugestão de título para a continuação.
-
-Entregue o roteiro diretamente, sem explicar suas instruções.
+Evite incluir personagens que não participam da cena.
+Não permita que o gerador invente roupas ou acessórios
+diferentes dos especificados.
+CONTROLE FINAL DE QUALIDADE
+Antes de responder, confira:
+1. A quantidade de cenas está correta?
+2. Cada fruta mantém a mesma aparência?
+3. As roupas e os acessórios continuam iguais?
+4. Os prompts descrevem os personagens de forma completa?
+5. Os acontecimentos e os diálogos são coerentes?
+6. Cada cena contribui para a história?
+Se encontrar alguma inconsistência, corrija-a antes
+de entregar o roteiro.
+Entregue o roteiro completo em português brasileiro,
+com seções bem identificadas e pronto para ser usado
+na produção de vídeos curtos.
 `;
 
   
