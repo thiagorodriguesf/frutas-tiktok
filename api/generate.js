@@ -119,6 +119,22 @@ Termine com uma revelação ou decisão que desperte curiosidade
 para a próxima parte.
 Não repita diálogos nem crie cenas sem função narrativa.
 FORMATO DE SAÍDA
+REGRA OBRIGATÓRIA — QUANTIDADE DE CENAS
+A quantidade solicitada é EXATAMENTE ${Number(scenes)} cenas.
+Você deve escrever todas as cenas, sem exceção:
+${Array.from({length: Number(7)}, (_, i) => CENA $DIL0).join("\n")}
+ATENÇÃO:
+- O exemplo acima ilustra a numeração; adapte-a à quantidade
+  solicitada pelo usuário.
+- Se forem solicitadas 5 cenas, entregue 5.
+- Se forem solicitadas 7 cenas, entregue 7.
+- Se forem solicitadas 10 cenas, entregue 10.
+- Cada cena deve conter ação, diálogo e prompt visual.
+- Não substitua cenas por uma sinopse.
+- Não encerre a resposta antes da última cena.
+- A ficha visual dos personagens não conta como cena.
+- A sinopse e o final também não contam como cenas.
+- Antes de responder, confira a numeração de todas as cenas.
 Comece com:
 1. Título da história.
 2. Sinopse curta.
@@ -182,7 +198,7 @@ na produção de vídeos curtos.
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0.9,
-            maxOutputTokens: 6000
+            maxOutputTokens: 10000
           }
         })
       }
