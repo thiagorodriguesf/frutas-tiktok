@@ -122,7 +122,7 @@ FORMATO DE SAÍDA
 REGRA OBRIGATÓRIA — QUANTIDADE DE CENAS
 A quantidade solicitada é EXATAMENTE ${Number(scenes)} cenas.
 Você deve escrever todas as cenas, sem exceção:
-${Array.from({length: Number(7)}, (_, i) => CENA $DIL0).join("\n")}
+Quantidade obrigatória: ${Number(scenes)} cenas completas, numeradas de CENA 1 até CENA ${Number(scenes)}.
 ATENÇÃO:
 - O exemplo acima ilustra a numeração; adapte-a à quantidade
   solicitada pelo usuário.
