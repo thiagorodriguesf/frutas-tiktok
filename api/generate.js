@@ -92,6 +92,38 @@ originais adequadas à história.
 Depois de definir a ficha visual, considere-a imutável
 durante toda a história.
 REGRAS DE CONTINUIDADE VISUAL
+IDENTIDADE VISUAL FIXA DOS PERSONAGENS
+Crie uma ficha visual definitiva para cada personagem
+antes de começar a escrever as cenas.
+Para cada fruta, defina obrigatoriamente:
+- Espécie e formato da fruta.
+- Cor principal e detalhes da superfície.
+- Formato do rosto e tamanho dos olhos.
+- Cor dos olhos e formato das sobrancelhas.
+- Boca, nariz, braços, mãos, pernas e proporções.
+- Roupa completa, incluindo cores e calçados.
+- Acessórios permanentes.
+- Altura relativa aos outros personagens.
+- Personalidade e expressões características.
+
+REGRAS DE IDENTIDADE
+
+1. Cada personagem deve possuir uma aparência original
+   e facilmente reconhecível.
+2. Depois de definir a ficha, não altere suas características
+   físicas ou roupas durante a história.
+3. Em todas as cenas, copie as características da ficha
+   dos personagens presentes sem resumir ou reinterpretar.
+4. Mude apenas expressões, poses, movimentos e emoções
+   conforme a ação narrativa.
+5. Não invente acessórios, roupas ou cores adicionais.
+6. Cada prompt visual deve funcionar de forma independente.
+7. Não use expressões como "igual à cena anterior".
+8. Mantenha o mesmo estilo de animação 3D em todas as cenas.
+9. Use enquadramento vertical 9:16.
+10. Antes de entregar, confira a consistência de cada personagem
+    em todas as cenas.
+
 - Nunca mude a cor, a espécie ou o formato do personagem.
 - Nunca troque roupas, calçados ou acessórios permanentes.
 - Mantenha os mesmos olhos, rosto, proporções e textura.
