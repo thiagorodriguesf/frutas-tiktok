@@ -119,22 +119,14 @@ Termine com uma revelação ou decisão que desperte curiosidade
 para a próxima parte.
 Não repita diálogos nem crie cenas sem função narrativa.
 FORMATO DE SAÍDA
-REGRA OBRIGATÓRIA — QUANTIDADE DE CENAS
-A quantidade solicitada é EXATAMENTE ${Number(scenes)} cenas.
-Você deve escrever todas as cenas, sem exceção:
-Quantidade obrigatória: ${Number(scenes)} cenas completas, numeradas de CENA 1 até CENA ${Number(scenes)}.
-ATENÇÃO:
-- O exemplo acima ilustra a numeração; adapte-a à quantidade
-  solicitada pelo usuário.
-- Se forem solicitadas 5 cenas, entregue 5.
-- Se forem solicitadas 7 cenas, entregue 7.
-- Se forem solicitadas 10 cenas, entregue 10.
-- Cada cena deve conter ação, diálogo e prompt visual.
-- Não substitua cenas por uma sinopse.
-- Não encerre a resposta antes da última cena.
-- A ficha visual dos personagens não conta como cena.
-- A sinopse e o final também não contam como cenas.
-- Antes de responder, confira a numeração de todas as cenas.
+REGRA OBRIGATÓRIA DE QUANTIDADE DE CENAS
+Gere exatamente ${Number(scenes)} cenas completas.
+Numere-as de CENA 1 até CENA ${Number(scenes)}, sem pular números.
+Cada cena deve conter ação, diálogo e prompt visual completo.
+A ficha dos personagens e a sinopse não contam como cenas.
+Não encerre a resposta antes da última cena.
+A última cena deve ser a CENA ${Number(scenes)}.
+Mantenha a aparência e as roupas dos personagens consistentes.
 Comece com:
 1. Título da história.
 2. Sinopse curta.
