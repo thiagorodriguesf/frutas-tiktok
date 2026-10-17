@@ -148,6 +148,13 @@ footer { text-align: center; color: var(--muted); font-size: 12px; }
     <h2>📜 Seu roteiro original</h2>
     <p class="muted" id="resumo"></p>
     <pre id="resultado"></pre>
+    <div id="promptsCenas" class="hidden">
+  <h2>🎬 Prompts para cada vídeo</h2>
+  <p class="muted">
+    Copie o prompt de cada cena e cole no Google Flow.
+  </p>
+  <div id="listaPrompts"></div>
+</div>
     <button class="primary" onclick="copiar()">📋 Copiar roteiro</button>
     <button class="secondary" onclick="baixar()">⬇️ Baixar roteiro TXT</button>
   </section>
@@ -211,6 +218,7 @@ async function gerar() {
     }
 
     document.getElementById("resultado").textContent = dados.roteiro;
+    criarPromptsCenas(dados.roteiro);
     document.getElementById("resumo").textContent =
       `${scenes} cenas • ${theme} • ${style}`;
 
@@ -248,6 +256,46 @@ function baixar() {
   link.download = "roteiro-frutadrama.txt";
   link.click();
   URL.revokeObjectURL(url);
+}
+  cenas.forEach((cena, indice) => {
+    const cartao = document.createElement("div");
+    cartao.className = "panel";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = "🎬 Cena " + (indice + 1);
+
+    const texto = document.createElement("p");
+    texto.textContent =
+      cena +
+      "\n\nEstilo: animação 3D cinematográfica. " +
+      "Formato vertical 9:16 para TikTok. " +
+      "Mantenha a aparência e as roupas dos personagens " +
+      "consistentes com as imagens de referência.";
+
+    const botao = document.createElement("button");
+    botao.className = "primary";
+    botao.textContent = "📋 Copiar prompt";
+
+    botao.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(texto.textContent);
+        botao.textContent = "✅ Copiado!";
+      } catch {
+        const campo = document.createElement("textarea");
+        campo.value = texto.textContent;
+        document.body.appendChild(campo);
+        campo.select();
+        document.execCommand("copy");
+        campo.remove();
+        botao.textContent = "✅ Copiado!";
+      }
+    };
+
+    cartao.append(titulo, texto, botao);
+    lista.appendChild(cartao);
+  });
+
+  area.classList.remove("hidden");
 }
 </script>
 </body>
