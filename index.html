@@ -218,6 +218,7 @@ async function gerar() {
     }
 
     document.getElementById("resultado").textContent = dados.roteiro;
+    criarPromptsCenas(dados.roteiro);
     document.getElementById("resumo").textContent =
       `${scenes} cenas • ${theme} • ${style}`;
 
@@ -295,6 +296,56 @@ function baixar() {
   });
 
   area.classList.remove("hidden");
+  function criarPromptsCenas(roteiro) {
+  const area = document.getElementById("promptsCenas");
+  const lista = document.getElementById("listaPrompts");
+
+  if (!area || !lista) return;
+
+  lista.innerHTML = "";
+
+  const cenas = roteiro.split(/(?=Cena\s+\d+|CENA\s+\d+|📸)/i)
+    .map(cena => cena.trim())
+    .filter(cena => cena.length > 20);
+
+  cenas.forEach((cena, index) => {
+    const cartao = document.createElement("div");
+    cartao.style.cssText = "background:#25182c;padding:16px;margin:12px 0;border-radius:12px;";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = `🎬 Cena ${index + 1}`;
+
+    const texto = document.createElement("p");
+    texto.textContent =
+      "Prompt para vídeo 3D vertical 9:16, animação cinematográfica de frutas humanoides. " +
+      "Preserve os personagens e suas características. Represente visualmente esta cena: " +
+      cena;
+
+    const botao = document.createElement("button");
+    botao.textContent = "📋 Copiar prompt";
+    botao.style.cssText = "background:#ff648c;color:#170f1c;border:0;padding:12px;border-radius:8px;cursor:pointer;width:100%;";
+
+    botao.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(texto.textContent);
+        botao.textContent = "✅ Copiado!";
+      } catch {
+        const campo = document.createElement("textarea");
+        campo.value = texto.textContent;
+        document.body.appendChild(campo);
+        campo.select();
+        document.execCommand("copy");
+        campo.remove();
+        botao.textContent = "✅ Copiado!";
+      }
+    };
+
+    cartao.append(titulo, texto, botao);
+    lista.appendChild(cartao);
+  });
+
+  area.classList.remove("hidden");
+}
 </script>
 </body>
 </html>
