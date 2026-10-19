@@ -305,12 +305,12 @@ function baixar() {
   lista.innerHTML = "";
 
   const partes = roteiro.split(
-    /(?=^###?\s*CENA\s+\d+\s*[:—-])/im
-  );
+  /(?=^\s*(?:#{1,6}\s*)?(?:\*\*)?CENA\s+\d+\s*[:：.\-–—])/im
+);
 
-  const cenas = partes
-    .map(parte => parte.trim())
-    .filter(parte => /^###?\s*CENA\s+\d+\s*[:—-]/i.test(parte));
+const cenas = partes
+  .map(parte => parte.trim())
+  .filter(parte => /^(?:#{1,6}\s*)?(?:\*\*)?CENA\s+\d+\s*[:：.\-–—]/im.test(parte));
 
   cenas.forEach((cena, index) => {
     const extrair = (campo, proximoCampo) => {
