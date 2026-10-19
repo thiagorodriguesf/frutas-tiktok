@@ -346,21 +346,17 @@ function baixar() {
     const transicao = extrair("Transição", "Duração");
 
     const prompt = [
-      "Crie um vídeo de animação 3D cinematográfica, vertical 9:16, com duração de " +
-        (duracao || "8 segundos") + ".",
-      "CENA: " + tituloCena,
-      local && "AÇÃO E CENÁRIO: " + local,
-      personagens && "PERSONAGENS: " + personagens,
-      movimentos && "EXPRESSÕES E MOVIMENTOS: " + movimentos,
-      visual && "REFERÊNCIA VISUAL: " + visual.replace(/`/g, ""),
-      dialogos && "DIÁLOGOS: " + dialogos,
-      camera && "CÂMERA: " + camera,
-      audio && "ÁUDIO E EFEITOS SONOROS: " + audio,
-      transicao && "TRANSIÇÃO FINAL: " + transicao,
-      "Mantenha a aparência, cores, roupas e acessórios dos personagens consistentes. " +
-        "Sincronize os movimentos da boca com as falas. Não inclua legendas, textos, " +
-        "logotipos ou marcas d'água, salvo se solicitado."
-    ].filter(Boolean).join("\n\n");
+  "Crie um vídeo de animação 3D cinematográfica, vertical 9:16, com duração de " +
+    (duracao || "8 segundos") + ".",
+  "CENA COMPLETA:",
+  cena,
+  "INSTRUÇÕES VISUAIS:",
+  "Preserve os personagens, cores, roupas e acessórios de forma consistente.",
+  "Anime as ações descritas na cena e sincronize os movimentos da boca com as falas.",
+  "Use câmera e iluminação cinematográficas, com movimentos naturais.",
+  "Não invente acontecimentos que contradigam a cena.",
+  "Não inclua legendas, textos, logotipos ou marcas d'água, salvo se solicitado."
+].filter(Boolean).join("\n\n");
 
     const cartao = document.createElement("div");
     cartao.style.cssText =
