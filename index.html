@@ -304,34 +304,88 @@ function baixar() {
 
   lista.innerHTML = "";
 
-  const cenas = roteiro.split(/(?=Cena\s+\d+|CENA\s+\d+|📸)/i)
-    .map(cena => cena.trim())
-    .filter(cena => cena.length > 20);
+  const partes = roteiro.split(
+    /(?=^###?\s*CENA\s+\d+\s*[:—-])/im
+  );
+
+  const cenas = partes
+    .map(parte => parte.trim())
+    .filter(parte => /^###?\s*CENA\s+\d+\s*[:—-]/i.test(parte));
 
   cenas.forEach((cena, index) => {
+    const extrair = (campo, proximoCampo) => {
+      const inicio = cena.search(new RegExp(
+        "^\\s*\\*\\*" + campo + "\\*\\*\\s*:",
+        "im"
+      ));
+
+      if (inicio === -1) return "";
+
+      const restante = cena.slice(inicio);
+      const regex = new RegExp(
+        "^\\s*\\*\\*" + campo + "\\*\\*\\s*:\\s*([\\s\\S]*?)(?=^\\s*\\*\\*" +
+        proximoCampo + "\\*\\*\\s*:|\\s*$)",
+        "im"
+      );
+
+      const resultado = restante.match(regex);
+      return resultado ? resultado[1].trim() : "";
+    };
+
+    const tituloMatch = cena.match(/^###?\s*CENA\s+\d+\s*[:—-]\s*(.+)$/im);
+    const tituloCena = tituloMatch ? tituloMatch[1].trim() : `Cena ${index + 1}`;
+
+    const duracao = extrair("Duração", "Objetivo Narrativo");
+    const local = extrair("Local e Ação", "Personagens Presentes");
+    const personagens = extrair("Personagens Presentes", "Expressões e Movimentos");
+    const movimentos = extrair("Expressões e Movimentos", "Diálogos");
+    const dialogos = extrair("Diálogos", "Prompt Visual");
+    const visual = extrair("Prompt Visual", "Enquadramento e Movimento de Câmera");
+    const camera = extrair("Enquadramento e Movimento de Câmera", "Sugestão de Áudio e Efeitos Sonoros");
+    const audio = extrair("Sugestão de Áudio e Efeitos Sonoros", "Transição");
+    const transicao = extrair("Transição", "Duração");
+
+    const prompt = [
+      "Crie um vídeo de animação 3D cinematográfica, vertical 9:16, com duração de " +
+        (duracao || "8 segundos") + ".",
+      "CENA: " + tituloCena,
+      local && "AÇÃO E CENÁRIO: " + local,
+      personagens && "PERSONAGENS: " + personagens,
+      movimentos && "EXPRESSÕES E MOVIMENTOS: " + movimentos,
+      visual && "REFERÊNCIA VISUAL: " + visual.replace(/`/g, ""),
+      dialogos && "DIÁLOGOS: " + dialogos,
+      camera && "CÂMERA: " + camera,
+      audio && "ÁUDIO E EFEITOS SONOROS: " + audio,
+      transicao && "TRANSIÇÃO FINAL: " + transicao,
+      "Mantenha a aparência, cores, roupas e acessórios dos personagens consistentes. " +
+        "Sincronize os movimentos da boca com as falas. Não inclua legendas, textos, " +
+        "logotipos ou marcas d'água, salvo se solicitado."
+    ].filter(Boolean).join("\n\n");
+
     const cartao = document.createElement("div");
-    cartao.style.cssText = "background:#25182c;padding:16px;margin:12px 0;border-radius:12px;";
+    cartao.style.cssText =
+      "background:#25182c;padding:16px;margin:12px 0;border-radius:12px;";
 
     const titulo = document.createElement("h3");
-    titulo.textContent = `🎬 Cena ${index + 1}`;
+    titulo.textContent = `🎬 Cena ${index + 1}: ${tituloCena}`;
 
     const texto = document.createElement("p");
-    texto.textContent =
-      "Prompt para vídeo 3D vertical 9:16, animação cinematográfica de frutas humanoides. " +
-      "Preserve os personagens e suas características. Represente visualmente esta cena: " +
-      cena;
+    texto.style.whiteSpace = "pre-wrap";
+    texto.textContent = prompt;
 
     const botao = document.createElement("button");
     botao.textContent = "📋 Copiar prompt";
-    botao.style.cssText = "background:#ff648c;color:#170f1c;border:0;padding:12px;border-radius:8px;cursor:pointer;width:100%;";
+    botao.style.cssText =
+      "background:#ff648c;color:#170f1c;border:0;padding:12px;" +
+      "border-radius:8px;cursor:pointer;width:100%;";
 
     botao.onclick = async () => {
       try {
-        await navigator.clipboard.writeText(texto.textContent);
+        await navigator.clipboard.writeText(prompt);
         botao.textContent = "✅ Copiado!";
       } catch {
         const campo = document.createElement("textarea");
-        campo.value = texto.textContent;
+        campo.value = prompt;
         document.body.appendChild(campo);
         campo.select();
         document.execCommand("copy");
