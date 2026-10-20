@@ -345,17 +345,24 @@ const cenas = partes
     const audio = extrair("Sugestão de Áudio e Efeitos Sonoros", "Transição");
     const transicao = extrair("Transição", "Duração");
 
-    const prompt = [
+    const limparTexto = (texto) => texto
+  .replace(/^#{1,6}\s*/gm, "")
+  .replace(/\*\*/g, "")
+  .replace(/^\s*---+\s*$/gm, "")
+  .replace(/^\s*[-*]\s+/gm, "")
+  .trim();
+
+const prompt = [
   "Crie um vídeo de animação 3D cinematográfica, vertical 9:16, com duração de " +
     (duracao || "8 segundos") + ".",
   "CENA COMPLETA:",
-  cena,
+  limparTexto(cena),
   "INSTRUÇÕES VISUAIS:",
-  "Preserve os personagens, cores, roupas e acessórios de forma consistente.",
-  "Anime as ações descritas na cena e sincronize os movimentos da boca com as falas.",
-  "Use câmera e iluminação cinematográficas, com movimentos naturais.",
-  "Não invente acontecimentos que contradigam a cena.",
-  "Não inclua legendas, textos, logotipos ou marcas d'água, salvo se solicitado."
+  "Mantenha os mesmos personagens, cores, roupas e acessórios em todas as cenas.",
+  "Anime as ações descritas e sincronize os movimentos da boca com os diálogos.",
+  "Use iluminação, enquadramento e movimentos de câmera cinematográficos.",
+  "Respeite a sequência dos acontecimentos descritos na cena.",
+  "Não inclua legendas, textos, logotipos ou marcas-d'água, salvo se solicitado."
 ].filter(Boolean).join("\n\n");
 
     const cartao = document.createElement("div");
