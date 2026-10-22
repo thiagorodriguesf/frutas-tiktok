@@ -257,7 +257,8 @@ function baixar() {
   link.click();
   URL.revokeObjectURL(url);
 }
-  cenas.forEach((cena, indice) => {
+  const listaCenas = Array.isArray(cenas) ? cenas : [];
+listaCenas.forEach((cena, indice) => {
     const cartao = document.createElement("div");
     cartao.className = "panel";
 
