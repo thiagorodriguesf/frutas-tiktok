@@ -427,7 +427,45 @@ const prompt = [
       }
     };
 
-    cartao.append(titulo, texto, botao);
+    const botaoImagem = document.createElement("button");
+botaoImagem.textContent = "🖼️ Copiar prompt de imagem";
+botaoImagem.style.cssText =
+  "background:#8b5cf6;color:white;border:0;padding:12px;" +
+  "border-radius:8px;cursor:pointer;width:100%;margin-top:8px;";
+
+const promptImagem = [
+  "Create a high-quality 3D animated movie character reference image.",
+  "Vertical 9:16 composition, full body, expressive eyes, detailed fruit texture, cinematic lighting.",
+  "Keep the same fruit characters, colors, clothing and accessories.",
+  "Scene description:",
+  limparTexto(cena),
+  "No text, subtitles, logos or watermark."
+].join("\n\n");
+
+botaoImagem.onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(promptImagem);
+    botaoImagem.textContent = "✅ Prompt de imagem copiado!";
+  } catch {
+    window.prompt("Copie o prompt de imagem:", promptImagem);
+  }
+};
+
+const botaoFlow = document.createElement("button");
+botaoFlow.textContent = "🌐 Abrir Google Flow";
+botaoFlow.style.cssText =
+  "background:#ff648c;color:#170f1c;border:0;padding:12px;" +
+  "border-radius:8px;cursor:pointer;width:100%;margin-top:8px;";
+
+botaoFlow.onclick = () => {
+  window.open(
+    "https://labs.google/fx/tools/flow",
+    "_blank",
+    "noopener,noreferrer"
+  );
+};
+
+cartao.append(titulo, texto, botao, botaoImagem, botaoFlow);
     lista.appendChild(cartao);
   });
 
