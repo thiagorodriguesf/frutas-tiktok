@@ -273,26 +273,55 @@ function baixar() {
       "consistentes com as imagens de referência.";
 
     const botao = document.createElement("button");
-    botao.className = "primary";
-    botao.textContent = "📋 Copiar prompt";
+botao.className = "primary";
+botao.textContent = "📋 Copiar prompt de vídeo";
 
-    botao.onclick = async () => {
-      try {
-        await navigator.clipboard.writeText(texto.textContent);
-        botao.textContent = "✅ Copiado!";
-      } catch {
-        const campo = document.createElement("textarea");
-        campo.value = texto.textContent;
-        document.body.appendChild(campo);
-        campo.select();
-        document.execCommand("copy");
-        campo.remove();
-        botao.textContent = "✅ Copiado!";
-      }
-    };
+botao.onclick = async () => {
+  const promptVideo = texto.textContent;
 
-    cartao.append(titulo, texto, botao);
-    lista.appendChild(cartao);
+  try {
+    await navigator.clipboard.writeText(promptVideo);
+    botao.textContent = "✅ Prompt copiado!";
+  } catch {
+    alert("Não foi possível copiar automaticamente. Selecione e copie o texto da cena.");
+  }
+};
+
+const botaoImagem = document.createElement("button");
+botaoImagem.className = "primary";
+botaoImagem.textContent = "🖼️ Copiar prompt de imagem";
+
+const promptImagem = [
+  "Create a high-quality 3D animated movie character reference image.",
+  "Vertical 9:16 composition, full body, expressive eyes, detailed fruit texture, cinematic lighting.",
+  "Use the characters and actions described in this scene:",
+  cena,
+  "Keep the fruit characters visually consistent. No text, subtitles, logos or watermark."
+].join("\n\n");
+
+botaoImagem.onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(promptImagem);
+    botaoImagem.textContent = "✅ Prompt de imagem copiado!";
+  } catch {
+    alert("Não foi possível copiar automaticamente. Tente novamente no Google Chrome.");
+  }
+};
+
+const botaoFlow = document.createElement("button");
+botaoFlow.className = "primary";
+botaoFlow.textContent = "🌐 Abrir Google Flow";
+
+botaoFlow.onclick = () => {
+  window.open(
+    "https://labs.google/fx/tools/flow",
+    "_blank",
+    "noopener,noreferrer"
+  );
+};
+
+cartao.append(titulo, texto, botao, botaoImagem, botaoFlow);
+lista.appendChild(cartao);
   });
 
   area.classList.remove("hidden");
